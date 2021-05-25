@@ -44,10 +44,10 @@ class Main():
 		url = f'{domain}.{url}'
 
 		try:
-			resolver.resolve(url)
-			return True
+			tst = resolver.resolve(url)
+			return [True, tst.nameserver]
 		except Exception as e:
-			return False
+			return [False]
 
 	def start(self):
 		if self.verify():
@@ -61,8 +61,8 @@ class Main():
 				print(f'[+] Testing domains... \n')
 				for sdm in subdomains:
 					test = self.test(sdm)
-					if test:
-						print(f'Possible valid subdomain: [{sdm}]')
+					if test[0]:
+						print(f'Possible valid subdomain: [{sdm}] -> [{test[1]}]')
 				f.close()
 		except Exception as e:
 			print(f'[!] Error when open file [{self.wordlist}].')
