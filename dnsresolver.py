@@ -45,7 +45,9 @@ class Main():
 
 		try:
 			tst = resolver.resolve(url)
-			return [True, tst.nameserver]
+			rps = tst.response.answer[0]
+			
+			return [True, rps]
 		except Exception as e:
 			return [False]
 
@@ -62,7 +64,8 @@ class Main():
 				for sdm in subdomains:
 					test = self.test(sdm)
 					if test[0]:
-						print(f'Possible valid subdomain: [{sdm}] -> [{test[1]}]')
+						for ip in test[1]:
+							print(f'Possible valid subdomain: [{sdm}] -> [{ip.to_text()}]')
 				f.close()
 		except Exception as e:
 			print(f'[!] Error when open file [{self.wordlist}].')
