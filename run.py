@@ -31,10 +31,13 @@ class Main():
 
 	def verify(self):
 		if self.url == '':
-			print(f'[!!!] You need pass a url with falg "--url"')
+			print('[*] You need pass a url with falg "--url"')
+			exit()
+		if self.wordlist == '':
+			print('[*] You need pass a wordlist with flag "--wordlist"')
 			exit()
 		if not verify_path(self.wordlist):
-			print(f'[!] The path [{self.wordlist}] is not valid!')
+			print(f'You need pass a valid wordlist')
 			exit()
 
 		return True
